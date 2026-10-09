@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123e3b">
+  <meta name="description" content="عالم بكرة: مغامرات تعليمية ومهام تفاعلية للأطفال." />
+  <title>عالم بكرة | مغامرتك تبدأ بالتعلّم</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; --forest:#123e3b; --leaf:#55a77a; --sun:#ffd05b; --coral:#f27a62; --sky:#8ed1df; --ink:#183c39; --muted:#69817c; --paper:#fffefa; --line:#d9e8df; --shadow:0 16px 40px rgba(20,64,57,.1); }
+    * { box-sizing:border-box; }
+    body { min-height:100vh; margin:0; color:var(--ink); background:#f0f6ef; background-image:radial-gradient(rgba(28,93,85,.08) 1px,transparent 1px); background-size:20px 20px; font-family:"Baloo Bhaijaan 2","Noto Sans Arabic",sans-serif; }
+    button,select { font:inherit; }
+    button:focus-visible,select:focus-visible { outline:3px solid var(--coral); outline-offset:3px; }
+    button { cursor:pointer; }
+    .app { width:min(1180px,100%); padding:20px 28px 36px; margin:0 auto; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:24px; }
+    .brand { display:flex; align-items:center; gap:12px; color:var(--forest); text-decoration:none; }
+    .brand-mark { display:grid; width:48px; height:48px; place-items:center; border-radius:16px; background:var(--forest); color:white; font-size:27px; box-shadow:0 5px 0 #0b2c2a; }
+    .brand-name { display:block; font-size:25px; font-weight:800; line-height:1.05; }
+    .brand-tagline { display:block; margin-top:3px; color:var(--muted); font-size:13px; }
+    .top-actions { display:flex; align-items:center; gap:10px; }
+    .parent-settings { position:relative; z-index:5; }
+    .parent-settings summary { display:flex; min-height:42px; align-items:center; gap:8px; padding:7px 12px; border:1px solid var(--line); border-radius:12px; background:var(--paper); color:var(--forest); font-weight:800; cursor:pointer; list-style:none; }
+    .parent-settings summary::-webkit-details-marker { display:none; }
+    .parent-panel { position:absolute; top:calc(100% + 8px); left:0; display:grid; width:min(330px,calc(100vw - 24px)); gap:12px; padding:16px; border:1px solid var(--line); border-radius:14px; background:var(--paper); box-shadow:var(--shadow); }
+    .parent-panel label { display:grid; gap:4px; color:var(--muted); font-size:14px; font-weight:700; }
+    .parent-panel select { width:100%; min-height:40px; padding:6px 9px; border:1px solid var(--line); border-radius:9px; background:white; color:var(--ink); }
+    .parent-note { margin:0; color:var(--muted); font-size:12px; line-height:1.45; }
+    .star-count { display:flex; align-items:center; gap:8px; min-height:42px; padding:7px 12px; border:1px solid var(--line); border-radius:12px; background:var(--paper); }
+    .star-count { border-color:#f3dfa1; background:#fff8df; color:#735812; font-weight:800; }
+    .star-icon { color:#e6aa19; font-size:20px; }
+    .install-button { display:inline-flex; min-height:42px; align-items:center; justify-content:center; gap:7px; padding:7px 13px; border:0; border-radius:12px; background:#c9342f; color:white; font-weight:800; box-shadow:0 3px 0 #94241f; }
+    .install-dialog { width:min(430px,calc(100vw - 28px)); padding:22px; border:1px solid var(--line); border-radius:16px; background:var(--paper); color:var(--ink); box-shadow:var(--shadow); }
+    .install-dialog::backdrop { background:rgba(12,34,31,.48); }
+    .install-dialog h2 { margin:0; font-size:23px; }
+    .install-dialog p { margin:10px 0 18px; color:var(--muted); line-height:1.55; }
+    .install-dialog .dialog-close { float:left; width:36px; height:36px; border:1px solid var(--line); border-radius:9px; background:white; color:var(--ink); font-size:20px; }
+    .hero { position:relative; display:flex; min-height:260px; align-items:center; justify-content:space-between; gap:24px; padding:30px 38px; overflow:hidden; border-radius:22px; background:var(--forest); color:white; box-shadow:0 12px 0 #0b302e,var(--shadow); isolation:isolate; }
+    .hero::before { position:absolute; z-index:-1; inset:0; background-image:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1px); background-size:18px 18px; content:""; }
+    .hero-copy { max-width:610px; }
+    .hero-kicker { display:inline-flex; align-items:center; gap:7px; margin:0 0 8px; color:#c8edcf; font-weight:800; }
+    .hero h1 { margin:0; font-size:clamp(31px,5vw,49px); line-height:1.13; }
+    .hero-copy>p:last-of-type { max-width:510px; margin:10px 0 18px; color:#d1e6dc; font-size:17px; }
+    .primary-button { display:inline-flex; align-items:center; gap:9px; min-height:46px; padding:9px 17px; border:0; border-radius:12px; background:var(--sun); color:#3f381e; font-weight:800; box-shadow:0 4px 0 #d5a537; transition:transform .15s,box-shadow .15s; }
+    .primary-button:hover { transform:translateY(2px); box-shadow:0 2px 0 #d5a537; }
+    .hero-art { position:relative; display:grid; width:230px; min-width:180px; height:190px; place-items:center; }
+    .planet { position:absolute; top:14px; right:16px; width:55px; height:55px; border:6px solid #b2e7db; border-radius:50%; background:var(--sky); box-shadow:0 0 0 8px rgba(142,209,223,.14); }
+    .planet::after { position:absolute; top:17px; right:-12px; width:58px; height:12px; border:3px solid var(--sun); border-radius:50%; transform:rotate(-22deg); content:""; }
+    .hero-character { position:relative; z-index:1; margin-top:22px; font-size:116px; filter:drop-shadow(0 10px 0 rgba(0,0,0,.12)); animation:float 3s ease-in-out infinite; }
+    .hero-star { position:absolute; bottom:23px; left:15px; color:var(--sun); font-size:35px; animation:twinkle 2.2s ease-in-out infinite; }
+    .section-nav { display:flex; max-width:100%; gap:6px; width:fit-content; padding:5px; margin:25px 0 18px; overflow-x:auto; border:1px solid var(--line); border-radius:13px; background:#e6eee6; scrollbar-width:thin; }
+    .tab-button { display:inline-flex; min-height:39px; align-items:center; gap:8px; padding:7px 13px; border:0; border-radius:9px; background:transparent; color:var(--muted); font-weight:800; white-space:nowrap; }
+    .tab-button[aria-selected="true"] { background:white; color:var(--forest); box-shadow:0 2px 8px rgba(21,58,48,.1); }
+    .section-heading { display:flex; align-items:end; justify-content:space-between; gap:16px; margin:0 0 13px; }
+    .section-heading h2 { margin:0; font-size:24px; line-height:1.2; }
+    .section-heading p { margin:5px 0 0; color:var(--muted); }
+    .progress-label { display:flex; align-items:center; gap:8px; color:var(--muted); font-weight:700; }
+    .progress-track { width:132px; height:8px; overflow:hidden; border-radius:8px; background:#dce8dd; }
+    .progress-fill { height:100%; border-radius:inherit; background:var(--leaf); transition:width .3s; }
+    .world-map { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; }
+    .world-card { position:relative; display:flex; min-height:210px; flex-direction:column; align-items:flex-start; padding:20px; overflow:hidden; border:1px solid var(--line); border-radius:17px; background:var(--paper); text-align:right; box-shadow:0 8px 22px rgba(24,60,57,.06); transition:transform .18s,box-shadow .18s; }
+    .world-card:not(:disabled):hover { transform:translateY(-4px); box-shadow:0 14px 28px rgba(24,60,57,.12); }
+    .world-card:disabled { cursor:not-allowed; filter:saturate(.55); }
+    .world-card::after { position:absolute; left:-18px; bottom:-44px; width:128px; height:128px; border:1px dashed currentColor; border-radius:50%; opacity:.18; content:""; }
+    .world-card[data-world="0"] { color:#286b59; }
+    .world-card[data-world="1"] { color:#a65c3c; }
+    .world-card[data-world="2"] { color:#496e9a; }
+    .world-top { display:flex; width:100%; align-items:center; justify-content:space-between; gap:10px; }
+    .world-icon { display:grid; width:54px; height:54px; place-items:center; border-radius:15px; background:#e8f5eb; color:#286b59; font-size:25px; }
+    .world-card[data-world="1"] .world-icon { background:#fff0e2; color:#a65c3c; }
+    .world-card[data-world="2"] .world-icon { background:#eaf1fb; color:#496e9a; }
+    .world-status { padding:5px 9px; border-radius:99px; background:#eef5ee; color:var(--muted); font-size:12px; font-weight:800; }
+    .world-card h3 { margin:14px 0 2px; color:var(--ink); font-size:21px; }
+    .world-card p { margin:0; color:var(--muted); font-size:14px; }
+    .world-footer { display:flex; width:100%; align-items:center; justify-content:space-between; gap:8px; margin-top:auto; padding-top:15px; color:var(--ink); font-size:13px; font-weight:800; }
+    .world-dots { display:flex; direction:ltr; gap:5px; }
+    .world-dots i { width:7px; height:7px; border-radius:50%; background:#dbe7dd; }
+    .world-dots i.done { background:var(--leaf); }
+    .mission-panel,.progress-panel { padding:22px; border:1px solid var(--line); border-radius:18px; background:var(--paper); box-shadow:var(--shadow); }
+    .mission-toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; }
+    .back-button { padding:8px 12px; border:1px solid var(--line); border-radius:10px; background:white; color:var(--forest); font-weight:800; }
+    .mission-count { color:var(--muted); font-weight:700; }
+    .mission-title { margin:0; font-size:25px; }
+    .mission-hint { margin:3px 0 17px; color:var(--muted); }
+    .question-box { padding:20px; border-radius:14px; background:#edf6ef; }
+    .question-kicker { margin:0 0 6px; color:var(--leaf); font-weight:800; }
+    .question-text { margin:0; font-size:24px; line-height:1.35; }
+    .question-art { display:flex; align-items:center; justify-content:center; min-height:90px; padding:12px; font-size:54px; }
+    .choice-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:14px; }
+    .choice { min-height:55px; padding:10px; border:1px solid var(--line); border-radius:12px; background:white; color:var(--ink); font-size:17px; font-weight:800; transition:background .15s,border .15s,transform .15s; }
+    .choice:hover:not(:disabled) { transform:translateY(-2px); border-color:#87b99a; background:#f6fbf6; }
+    .choice.correct { border-color:#62a67b; background:#e5f4e9; color:#1d6842; }
+    .choice.wrong { border-color:#e99582; background:#fff0eb; color:#a44937; }
+    .mission-feedback { min-height:27px; margin:12px 0; font-weight:800; }
+    .mission-feedback.success { color:#287c50; }
+    .mission-feedback.retry { color:#a44937; }
+    .continue-button { display:none; }
+    .progress-panel { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .stat { padding:18px; border-radius:13px; background:#eef6ef; }
+    .stat strong { display:block; color:var(--forest); font-size:28px; }
+    .stat span { color:var(--muted); }
+    .badges { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; grid-column:1/-1; margin-top:8px; }
+    .badge { display:flex; align-items:center; gap:11px; padding:13px; border:1px solid var(--line); border-radius:12px; }
+    .badge-icon { display:grid; width:38px; height:38px; place-items:center; border-radius:11px; background:#edf0ed; color:#9ba9a0; font-size:18px; }
+    .badge.earned .badge-icon { background:#fff4d7; color:#d69a16; }
+    .badge strong { display:block; }
+    .badge small { color:var(--muted); }
+    .feature-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; align-items:start; }
+    .feature-panel { min-width:0; padding:20px; border:1px solid var(--line); border-radius:17px; background:var(--paper); box-shadow:0 8px 22px rgba(24,60,57,.06); }
+    .feature-title { display:flex; align-items:center; gap:10px; margin:0 0 5px; font-size:21px; }
+    .feature-title i { color:var(--leaf); }
+    .feature-intro { margin:0 0 14px; color:var(--muted); }
+    .feature-select { display:grid; gap:5px; margin-bottom:12px; color:var(--muted); font-weight:700; }
+    .feature-select select { min-height:42px; padding:7px 10px; border:1px solid var(--line); border-radius:10px; background:white; color:var(--ink); }
+    .verse-list { display:grid; gap:8px; padding:14px; border-radius:12px; background:#f1f7ef; text-align:center; }
+    .verse-list p { margin:0; color:var(--forest); font-size:20px; line-height:1.8; }
+    .small-action { min-height:38px; padding:7px 11px; border:1px solid var(--line); border-radius:9px; background:white; color:var(--forest); font-weight:800; }
+    .faith-feedback,.language-feedback { min-height:24px; margin:9px 0 0; color:var(--leaf); font-weight:800; }
+    .ethics-prompt { min-height:55px; margin:11px 0; font-size:18px; line-height:1.4; }
+    .ethics-choices { display:grid; gap:8px; }
+    .ethics-choice { min-height:43px; padding:8px 11px; border:1px solid var(--line); border-radius:10px; background:white; color:var(--ink); text-align:right; }
+    .ethics-choice.correct { border-color:#62a67b; background:#e5f4e9; color:#1d6842; }
+    .ethics-choice.wrong { border-color:#e99582; background:#fff0eb; color:#a44937; }
+    .ethics-choice:disabled { cursor:default; }
+    .language-toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+    .language-toolbar .feature-select { min-width:min(260px,100%); margin:0; }
+    .phrase-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .phrase-card { display:grid; gap:10px; padding:16px; border:1px solid var(--line); border-radius:13px; background:white; }
+    .phrase-word { color:var(--forest); font-family:"Nunito",sans-serif; font-size:22px; font-weight:900; text-align:left; }
+    .phrase-meaning { color:var(--muted); }
+    .phrase-speak { justify-self:start; min-height:36px; padding:6px 10px; border:1px solid var(--line); border-radius:9px; background:#f5faf5; color:var(--forest); font-weight:800; }
+    .tutor-panel { max-width:780px; padding:20px; border:1px solid var(--line); border-radius:17px; background:var(--paper); box-shadow:var(--shadow); }
+    .tutor-log { display:grid; max-height:340px; gap:10px; min-height:170px; padding:14px; overflow-y:auto; border-radius:12px; background:#f1f7ef; }
+    .chat-message { max-width:88%; padding:10px 13px; border-radius:12px; line-height:1.5; }
+    .chat-message.assistant { justify-self:start; background:white; }
+    .chat-message.child { justify-self:end; background:#dff0e4; }
+    .tutor-actions { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+    .tutor-actions button { min-height:36px; padding:6px 11px; border:1px solid var(--line); border-radius:9px; background:white; color:var(--forest); font-weight:800; }
+    .tutor-form { display:flex; gap:8px; }
+    .tutor-form input { flex:1; min-width:0; min-height:44px; padding:8px 11px; border:1px solid var(--line); border-radius:10px; }
+    .tutor-form button { min-height:44px; padding:8px 13px; border:0; border-radius:10px; background:var(--forest); color:white; font-weight:800; }
+    .tutor-note { margin:12px 0 0; color:var(--muted); font-size:13px; }
+    .privacy-note { margin:20px 0 0; color:var(--muted); font-size:13px; text-align:center; }
+    .rating-panel { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px 22px; align-items:center; margin-top:26px; padding:22px; border:1px solid var(--line); border-radius:17px; background:var(--paper); box-shadow:0 8px 22px rgba(24,60,57,.06); }
+    .rating-heading { display:flex; align-items:center; gap:9px; margin:0; font-size:20px; }
+    .rating-heading i { color:#d99f1a; }
+    .rating-copy { margin:3px 0 0; color:var(--muted); }
+    .rating-stars { display:flex; gap:5px; direction:ltr; }
+    .rating-star { display:grid; width:40px; height:40px; place-items:center; border:1px solid var(--line); border-radius:10px; background:white; color:#9aa7a0; font-size:19px; transition:color .15s,background .15s,transform .15s; }
+    .rating-star:hover { transform:translateY(-2px); }
+    .rating-star[aria-pressed="true"] { border-color:#efd889; background:#fff5d9; color:#d99f1a; }
+    .rating-form { display:grid; grid-column:1/-1; grid-template-columns:minmax(0,1fr) auto; gap:8px 10px; }
+    .rating-form label { grid-column:1/-1; color:var(--muted); font-size:14px; }
+    .rating-form textarea { min-width:0; min-height:54px; padding:9px 11px; resize:vertical; border:1px solid var(--line); border-radius:10px; background:white; color:var(--ink); font:inherit; }
+    .rating-submit { min-height:44px; padding:8px 14px; border:0; border-radius:10px; background:var(--forest); color:white; font-weight:800; }
+    .rating-status,.rating-note { grid-column:1/-1; margin:0; color:var(--muted); font-size:13px; }
+    .rating-status { min-height:20px; color:var(--leaf); font-weight:800; }
+    .site-footer { display:flex; justify-content:center; align-items:center; gap:7px; padding:18px 0 0; color:var(--muted); font-size:13px; }
+    .site-footer strong { color:var(--forest); font-family:"Nunito",sans-serif; font-size:14px; }
+    .entry-screen { display:grid; min-height:100vh; place-items:center; padding:28px; background:linear-gradient(145deg,#e4f1e7,#f5f3e7); }
+    .entry-shell { display:grid; grid-template-columns:1fr 1fr; width:min(980px,100%); min-height:520px; overflow:hidden; border:1px solid rgba(204,227,216,.9); border-radius:22px; background:var(--paper); box-shadow:var(--shadow); }
+    .entry-art { position:relative; display:flex; flex-direction:column; justify-content:space-between; min-height:100%; padding:34px; overflow:hidden; background:var(--forest); color:white; isolation:isolate; }
+    .entry-art::before { position:absolute; z-index:-1; inset:0; background-image:radial-gradient(rgba(255,255,255,.15) 1px,transparent 1px); background-size:19px 19px; content:""; }
+    .entry-logo { display:flex; align-items:center; gap:11px; font-weight:800; }
+    .entry-logo-mark { display:grid; width:44px; height:44px; place-items:center; border-radius:14px; background:#fffefa; color:var(--forest); font-size:24px; }
+    .entry-art-copy { max-width:360px; margin:auto 0; }
+    .entry-art-copy h2 { margin:0; font-size:36px; line-height:1.15; }
+    .entry-art-copy p { margin:10px 0 0; color:#d1e6dc; font-size:17px; }
+    .entry-mascot { position:absolute; left:24px; bottom:20px; color:var(--sun); font-size:95px; opacity:.92; transform:rotate(-8deg); }
+    .entry-form-panel { display:flex; flex-direction:column; justify-content:center; padding:42px; }
+    .entry-kicker { margin:0 0 5px; color:var(--leaf); font-weight:800; }
+    .entry-form-panel h1 { margin:0; color:var(--forest); font-size:31px; }
+    .entry-intro { margin:5px 0 22px; color:var(--muted); }
+    .entry-form { display:grid; gap:13px; }
+    .entry-form label { display:grid; gap:5px; color:var(--ink); font-weight:800; }
+    .entry-form input,.entry-form select { width:100%; min-height:48px; padding:9px 12px; border:1px solid var(--line); border-radius:10px; background:white; color:var(--ink); }
+    .entry-form input::placeholder { color:#9ba9a2; }
+    .entry-submit { display:flex; min-height:48px; align-items:center; justify-content:center; gap:9px; margin-top:4px; border:0; border-radius:11px; background:var(--forest); color:white; font-weight:800; box-shadow:0 4px 0 #0b302e; }
+    .entry-submit:hover { background:var(--forest-soft); }
+    .entry-privacy { margin:13px 0 0; color:var(--muted); font-size:13px; line-height:1.5; }
+    [hidden] { display:none !important; }
+    @keyframes float { 0%,100% { transform:translateY(0) rotate(-2deg); } 50% { transform:translateY(-9px) rotate(2deg); } }
+    @keyframes twinkle { 0%,100% { opacity:.65; transform:scale(.9); } 50% { opacity:1; transform:scale(1.1); } }
+    @media (max-width:760px) {
+      .app { padding:15px 16px 28px; }
+      .entry-screen { padding:14px; }
+      .entry-shell { grid-template-columns:1fr; max-width:500px; min-height:0; }
+      .entry-art { min-height:210px; padding:22px; }
+      .entry-art-copy { max-width:300px; margin:28px 0 0; }
+      .entry-art-copy h2 { font-size:29px; }
+      .entry-art-copy p { max-width:260px; font-size:15px; }
+      .entry-mascot { left:10px; bottom:4px; font-size:68px; }
+      .entry-form-panel { padding:25px 22px; }
+      .entry-form-panel h1 { font-size:27px; }
+      .topbar { margin-bottom:17px; }
+      .hero { min-height:230px; padding:24px; }
+      .hero-art { width:175px; min-width:135px; }
+      .hero-character { font-size:92px; }
+      .world-map { grid-template-columns:1fr; }
+      .world-card { min-height:174px; }
+      .world-card h3 { margin-top:10px; }
+    }
+    @media (max-width:500px) {
+      .app { padding-right:12px; padding-left:12px; }
+      .topbar { align-items:flex-start; }
+      .brand { gap:8px; }
+      .brand-mark { width:41px; height:41px; border-radius:13px; font-size:23px; }
+      .brand-name { font-size:21px; }
+      .brand-tagline { font-size:11px; }
+      .top-actions { flex-wrap:wrap; justify-content:flex-end; gap:6px; }
+      .parent-settings summary,.star-count,.install-button { min-height:36px; padding:5px 8px; font-size:12px; }
+      .parent-panel { left:auto; right:0; }
+      .hero { min-height:225px; padding:21px 18px; }
+      .hero h1 { font-size:33px; }
+      .hero-copy>p:last-of-type { max-width:280px; font-size:15px; }
+      .hero-art { position:absolute; left:-16px; bottom:-8px; width:130px; min-width:130px; height:125px; opacity:.65; }
+      .hero-character { font-size:79px; }
+      .planet { top:3px; right:15px; width:40px; height:40px; }
+      .planet::after { top:12px; width:44px; height:9px; }
+      .hero-star { bottom:12px; left:1px; font-size:26px; }
+      .section-nav { margin-top:21px; }
+      .section-nav { width:100%; }
+      .tab-button { padding-right:10px; padding-left:10px; }
+      .section-heading { align-items:flex-start; flex-direction:column; gap:8px; }
+      .section-heading h2 { font-size:22px; }
+      .mission-panel { padding:14px; }
+      .question-box { padding:16px; }
+      .question-text { font-size:21px; }
+      .choice-list { grid-template-columns:1fr; gap:8px; }
+      .choice { min-height:47px; }
+      .progress-panel,.badges { grid-template-columns:1fr; }
+      .feature-grid,.phrase-list { grid-template-columns:1fr; }
+      .feature-panel,.tutor-panel { padding:15px; }
+      .language-toolbar { align-items:flex-start; flex-direction:column; }
+      .rating-panel { grid-template-columns:1fr; gap:10px; padding:16px; }
+      .rating-stars { justify-content:flex-start; }
+      .rating-star { width:36px; height:36px; }
+      .rating-form { grid-template-columns:1fr; }
+      .rating-form label,.rating-status,.rating-note { grid-column:auto; }
+    }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  </style>
+</head>
+<body>
+  <section class="entry-screen" id="entry-screen" aria-labelledby="entry-title">
+    <div class="entry-shell">
+      <div class="entry-art" aria-hidden="true">
+        <div class="entry-logo"><span class="entry-logo-mark">ب</span><span>عالم بكرة</span></div>
+        <div class="entry-art-copy"><h2>كل إجابة تفتح لك عالمًا جديدًا</h2><p>رحلتك في المعرفة تبدأ بخطوة صغيرة.</p></div>
+        <i class="fa-solid fa-user-astronaut entry-mascot"></i>
+      </div>
+      <div class="entry-form-panel">
+        <p class="entry-kicker">دخول اللاعب</p>
+        <h1 id="entry-title">أهلًا بك في عالم بكرة</h1>
+        <p class="entry-intro">اكتب اسمًا مستعارًا واختار صفك لبدء الرحلة.</p>
+        <form class="entry-form" id="entry-form">
+          <label for="entry-name">اسم اللاعب
+            <input id="entry-name" name="player-name" type="text" maxlength="20" autocomplete="nickname" placeholder="مثال: بطل الفضاء" required>
+          </label>
+          <label for="entry-grade">الصف الدراسي
+            <select id="entry-grade" name="grade"><option value="kg1">روضة أولى</option><option value="kg2">روضة ثانية</option><option value="1">الصف الأول</option><option value="2">الصف الثاني</option><option value="3">الصف الثالث</option><option value="4">الصف الرابع</option><option value="5">الصف الخامس</option><option value="6">الصف السادس</option><option value="7">الصف السابع</option><option value="8">الصف الثامن</option><option value="9">الصف التاسع</option><option value="10">الصف العاشر</option><option value="11">الصف الحادي عشر</option><option value="12">الصف الثاني عشر</option></select>
+          </label>
+          <button class="entry-submit" type="submit"><span id="entry-submit-label">ابدأ المغامرة</span><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+        </form>
+        <p class="entry-privacy">دخول محلي على هذا الجهاز فقط؛ لا نطلب بريدًا أو كلمة مرور، ولا نرسل الاسم إلى الإنترنت.</p>
+      </div>
+    </div>
+  </section>
+  <div class="app" id="app" hidden>
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="عالم بكرة، الصفحة الرئيسية"><span class="brand-mark" aria-hidden="true">ب</span><span><span class="brand-name">عالم بكرة</span><span class="brand-tagline">كل إجابة تفتح طريقًا جديدًا</span></span></a>
+      <div class="top-actions">
+        <details class="parent-settings">
+          <summary><i class="fa-solid fa-sliders" aria-hidden="true"></i> إعداد وليّ الأمر</summary>
+          <div class="parent-panel">
+            <label for="country-select">الدولة
+              <select id="country-select">
+                <option value="">اختر الدولة</option><option value="dz">الجزائر</option><option value="bh">البحرين</option><option value="km">جزر القمر</option><option value="dj">جيبوتي</option><option value="eg">مصر</option><option value="iq">العراق</option><option value="jo">الأردن</option><option value="kw">الكويت</option><option value="lb">لبنان</option><option value="ly">ليبيا</option><option value="mr">موريتانيا</option><option value="ma">المغرب</option><option value="om">عُمان</option><option value="ps">فلسطين</option><option value="qa">قطر</option><option value="sa">السعودية</option><option value="so">الصومال</option><option value="sd">السودان</option><option value="sy">سوريا</option><option value="tn">تونس</option><option value="ae">الإمارات</option><option value="ye">اليمن</option>
+              </select>
+            </label>
+            <label for="grade-select">الصف الدراسي
+              <select id="grade-select">
+                <option value="kg1">روضة أولى</option><option value="kg2">روضة ثانية</option><option value="1">الصف الأول</option><option value="2">الصف الثاني</option><option value="3">الصف الثالث</option><option value="4">الصف الرابع</option><option value="5">الصف الخامس</option><option value="6">الصف السادس</option><option value="7">الصف السابع</option><option value="8">الصف الثامن</option><option value="9">الصف التاسع</option><option value="10">الصف العاشر</option><option value="11">الصف الحادي عشر</option><option value="12">الصف الثاني عشر</option>
+              </select>
+            </label>
+            <p class="parent-note">المحتوى الحالي تأسيسي وموزّع حسب المرحلة. مطابقة كتب ومناهج كل وزارة تحتاج مراجعة مصادرها الرسمية.</p>
+          </div>
+        </details>
+        <div class="star-count" aria-live="polite"><i class="fa-solid fa-star star-icon" aria-hidden="true"></i><span id="star-count">٠ نجوم</span></div>
+        <button class="install-button" id="install-app" type="button" aria-label="Install from app"><i class="fa-solid fa-download" aria-hidden="true"></i><span id="install-label">Install from app</span></button>
+      </div>
+    </header>
+    <dialog class="install-dialog" id="install-help" aria-labelledby="install-help-title">
+      <button class="dialog-close" id="install-help-close" type="button" aria-label="إغلاق">×</button>
+      <h2 id="install-help-title">ثبّت عالم بكرة</h2>
+      <p id="install-guidance"></p>
+      <button class="primary-button" id="install-help-done" type="button">حسنًا</button>
+    </dialog>
+    <main id="home">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy"><p class="hero-kicker"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> مغامرتك التعليمية</p><h1 id="hero-title">كل خطوة تفتح<br>عالمًا جديدًا</h1><p>حلّ المهام، اكتشف أسرار العوالم، واجمع النجوم في طريقك.</p><button class="primary-button" id="start-adventure" type="button"><span id="start-label">كمّل مغامرتك</span><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button></div>
+        <div class="hero-art" aria-hidden="true"><span class="planet"></span><i class="fa-solid fa-user-astronaut hero-character"></i><i class="fa-solid fa-star hero-star"></i></div>
+      </section>
+      <nav class="section-nav" role="tablist" aria-label="أقسام التطبيق"><button class="tab-button" id="map-tab" role="tab" aria-selected="true" type="button"><i class="fa-solid fa-map" aria-hidden="true"></i> العوالم</button><button class="tab-button" id="faith-tab" role="tab" aria-selected="false" type="button"><i class="fa-solid fa-book-quran" aria-hidden="true"></i> القرآن والأخلاق</button><button class="tab-button" id="language-tab" role="tab" aria-selected="false" type="button"><i class="fa-solid fa-language" aria-hidden="true"></i> اللغات</button><button class="tab-button" id="tutor-tab" role="tab" aria-selected="false" type="button"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> المعلّم</button><button class="tab-button" id="progress-tab" role="tab" aria-selected="false" type="button"><i class="fa-solid fa-award" aria-hidden="true"></i> إنجازاتي</button></nav>
+      <section id="map-view" role="tabpanel" aria-labelledby="map-tab">
+        <div class="section-heading"><div><h2>اختار عالمك الأول</h2><p id="curriculum-summary">محتوى تأسيسي لكل المراحل.</p></div><div class="progress-label"><span id="overall-progress">٠ من ٢٤ مهام</span><span class="progress-track"><span class="progress-fill" id="overall-fill" style="display:block;width:0%"></span></span></div></div>
+        <div class="world-map" id="world-map"></div>
+      </section>
+      <section id="mission-view" class="mission-panel" aria-labelledby="mission-title" hidden>
+        <div class="mission-toolbar"><button class="back-button" id="back-to-map" type="button"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i> الخريطة</button><span class="mission-count" id="mission-count"></span></div>
+        <h2 class="mission-title" id="mission-title"></h2><p class="mission-hint" id="mission-hint"></p>
+        <div class="question-box"><p class="question-kicker" id="question-kicker"></p><p class="question-text" id="question-text"></p><div class="question-art" id="question-art" aria-hidden="true"></div></div>
+        <div class="choice-list" id="choice-list"></div><p class="mission-feedback" id="mission-feedback" aria-live="polite"></p><button class="primary-button continue-button" id="continue-mission" type="button"><span id="continue-label">السؤال التالي</span><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+      </section>
+      <section id="faith-view" role="tabpanel" aria-labelledby="faith-tab" hidden>
+        <div class="section-heading"><div><h2>القرآن والأخلاق</h2><p>آيات للحفظ، ومواقف نختار فيها التصرف الأحسن.</p></div></div>
+        <div class="feature-grid">
+          <section class="feature-panel" aria-labelledby="quran-heading">
+            <h3 class="feature-title" id="quran-heading"><i class="fa-solid fa-book-quran" aria-hidden="true"></i> ورد الحفظ</h3>
+            <label class="feature-select" for="surah-select">السورة<select id="surah-select"><option value="ikhlas">سورة الإخلاص</option><option value="falaq">سورة الفلق</option><option value="nas">سورة الناس</option></select></label>
+            <div class="verse-list" id="verse-list" lang="ar"></div>
+            <button class="small-action" id="toggle-verses" type="button">أخفِ الآيات للمراجعة</button>
+            <p class="faith-feedback" id="quran-feedback" aria-live="polite"></p>
+          </section>
+          <section class="feature-panel" aria-labelledby="ethics-heading">
+            <h3 class="feature-title" id="ethics-heading"><i class="fa-solid fa-handshake-angle" aria-hidden="true"></i> مواقف وأخلاق</h3>
+            <p class="ethics-prompt" id="ethics-prompt"></p>
+            <div class="ethics-choices" id="ethics-choices"></div>
+            <p class="faith-feedback" id="ethics-feedback" aria-live="polite"></p>
+            <button class="small-action" id="next-ethics" type="button" hidden>موقف آخر</button>
+          </section>
+        </div>
+      </section>
+      <section id="language-view" role="tabpanel" aria-labelledby="language-tab" hidden>
+        <div class="section-heading"><div><h2>لغات العالم</h2><p>عبارات قصيرة مع معناها ونطقها.</p></div></div>
+        <div class="feature-panel">
+          <div class="language-toolbar"><h3 class="feature-title"><i class="fa-solid fa-language" aria-hidden="true"></i> مفردات اليوم</h3><label class="feature-select" for="language-select">اختار اللغة<select id="language-select"><option value="en">الإنجليزية</option><option value="fr">الفرنسية</option><option value="es">الإسبانية</option><option value="tr">التركية</option><option value="de">الألمانية</option><option value="it">الإيطالية</option><option value="ja">اليابانية</option></select></label></div>
+          <div class="phrase-list" id="phrase-list"></div>
+          <p class="language-feedback" id="language-feedback" aria-live="polite"></p>
+        </div>
+      </section>
+      <section id="tutor-view" role="tabpanel" aria-labelledby="tutor-tab" hidden>
+        <div class="section-heading"><div><h2>المعلّم الذكي</h2><p>مساعدة مناسبة لمرحلتك الدراسية.</p></div></div>
+        <div class="tutor-panel">
+          <div class="tutor-log" id="tutor-log" role="log" aria-live="polite"><div class="chat-message assistant">أهلًا! افتح درسًا ثم اطلب تلميحًا أو شرحًا.</div></div>
+          <div class="tutor-actions"><button type="button" data-tutor-action="hint">تلميح</button><button type="button" data-tutor-action="explain">اشرح الدرس الحالي</button></div>
+          <form class="tutor-form" id="tutor-form"><input id="tutor-input" type="text" maxlength="160" autocomplete="off" placeholder="اكتب سؤالك"><button type="submit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> إرسال</button></form>
+          <p class="tutor-note">نسخة تجريبية بإجابات تعليمية جاهزة؛ لا تُرسل المحادثة أو تحفظها. ربط نموذج ذكاء اصطناعي حقيقي يحتاج خادمًا آمنًا وإشراف وليّ الأمر.</p>
+        </div>
+      </section>
+      <section id="progress-view" role="tabpanel" aria-labelledby="progress-tab" hidden>
+        <div class="section-heading"><div><h2>رحلتك لحد دلوقتي</h2><p>كل نجمة دليل على حاجة جديدة اتعلمتها.</p></div></div>
+        <div class="progress-panel"><div class="stat"><strong id="stat-stars">٠</strong><span>نجمة جمعتها</span></div><div class="stat"><strong id="stat-missions">٠ / ٢٤</strong><span>مهمة خلصتها</span></div><div class="stat"><strong id="stat-worlds">٠ / ٣</strong><span>عالم فتحته</span></div><div class="badges" id="badges"></div></div>
+      </section>
+      <p class="privacy-note">تقدمك محفوظ على هذا الجهاز فقط، من غير إنشاء حساب أو إرسال بيانات.</p>
+      <section class="rating-panel" aria-labelledby="rating-title">
+        <div><h2 class="rating-heading" id="rating-title"><i class="fa-solid fa-star" aria-hidden="true"></i> تقييم وليّ الأمر</h2><p class="rating-copy">رأيك يساعدنا نطوّر عالم بكرة.</p></div>
+        <div class="rating-stars" role="group" aria-label="اختر تقييمًا من نجمة إلى خمس نجوم"><button class="rating-star" type="button" data-rating="1" aria-label="نجمة واحدة" aria-pressed="false"><i class="fa-solid fa-star" aria-hidden="true"></i></button><button class="rating-star" type="button" data-rating="2" aria-label="نجمتان" aria-pressed="false"><i class="fa-solid fa-star" aria-hidden="true"></i></button><button class="rating-star" type="button" data-rating="3" aria-label="ثلاث نجوم" aria-pressed="false"><i class="fa-solid fa-star" aria-hidden="true"></i></button><button class="rating-star" type="button" data-rating="4" aria-label="أربع نجوم" aria-pressed="false"><i class="fa-solid fa-star" aria-hidden="true"></i></button><button class="rating-star" type="button" data-rating="5" aria-label="خمس نجوم" aria-pressed="false"><i class="fa-solid fa-star" aria-hidden="true"></i></button></div>
+        <form class="rating-form" id="rating-form"><label for="rating-note-input">ملاحظة أو اقتراح (اختياري)</label><textarea id="rating-note-input" maxlength="300" placeholder="اكتب اقتراحًا لتحسين التجربة"></textarea><button class="rating-submit" type="submit">حفظ التقييم</button></form>
+        <p class="rating-status" id="rating-status" aria-live="polite"></p><p class="rating-note">التقييم محفوظ على هذا الجهاز فقط، ولا يصل للمؤلف في هذه النسخة.</p>
+      </section>
+      <footer class="site-footer"><span>تأليف</span><strong lang="en" dir="ltr">Islam Tamer Emad</strong></footer>
+    </main>
+  </div>
+  <script>
+    const worlds = [
+      { name:"مرفأ الحروف", icon:"fa-book-open", description:"اكتشف أصوات الكلمات وأسرار الكتابة.", missions:[
+        { name:"رسالة من الألف", art:"🦁", levels:{ little:{prompt:"أي حرف يبدأ به اسم أَسَد؟",choices:["أ","ب","ت"],answer:"أ",tip:"أَسَد يبدأ بحرف الألف."}, primary:{prompt:"أي كلمة تبدأ بحرف الألف؟",choices:["مدرسة","أمان","كتاب"],answer:"أمان",tip:"كلمة أمان تبدأ بالألف."}, teen:{prompt:"أي كلمة تبدأ بهمزة قطع؟",choices:["استخدام","أمانة","استقبال"],answer:"أمانة",tip:"همزة القطع تُكتب فوق الألف في كلمة أمانة."} } },
+        { name:"جسر الكلمات", art:"🌉", levels:{ little:{prompt:"ما الحرف الأول في كلمة بَطّة؟",choices:["ب","ج","س"],answer:"ب",tip:"بَطّة تبدأ بحرف الباء."}, primary:{prompt:"أي كلمة تنتهي بحرف التاء؟",choices:["بيت","قلم","نور"],answer:"بيت",tip:"كلمة بيت تنتهي بحرف التاء."}, teen:{prompt:"أي كلمة تنتهي بتاء مربوطة؟",choices:["معلّمات","حديقة","كتب"],answer:"حديقة",tip:"كلمة حديقة تنتهي بتاء مربوطة."} } },
+        { name:"سرّ الجملة", art:"📜", levels:{ little:{prompt:"رتّب الحروف: أ، ب، ...؟",choices:["ت","ج","م"],answer:"ت",tip:"بعد الألف والباء يأتي حرف التاء."}, primary:{prompt:"ما الكلمة التي تصف كلمة (زهرة)؟",choices:["جميلة","يكتب","إلى"],answer:"جميلة",tip:"جميلة صفة تصف الزهرة."}, teen:{prompt:"أي جملة كُتبت بعلامة الترقيم المناسبة؟",choices:["أين الكتاب؟","أين الكتاب.","أين الكتاب،"],answer:"أين الكتاب؟",tip:"نستخدم علامة الاستفهام بعد السؤال."} } },
+        { name:"مغامرة الشين", art:"☀️", levels:{ little:{prompt:"أي كلمة تبدأ بحرف الشين؟",choices:["شمس","قمر","نهر"],answer:"شمس",tip:"شمس تبدأ بحرف الشين."}, primary:{prompt:"أي كلمة تبدأ بـ(الـ) الشمسية؟",choices:["الشجرة","القمر","الكتاب"],answer:"الشجرة",tip:"حرف الشين من الحروف الشمسية."}, teen:{prompt:"أي كلمة كُتبت فيها الهمزة المتوسطة على الواو؟",choices:["مسؤول","سائل","قراءة"],answer:"مسؤول",tip:"في كلمة مسؤول كُتبت الهمزة المتوسطة على الواو."} } },
+        { name:"حديقة المفردات", art:"🌷", levels:{ little:{prompt:"ما عكس كلمة (كبير)؟",choices:["صغير","طويل","سريع"],answer:"صغير",tip:"عكس كبير هو صغير."}, primary:{prompt:"ما مرادف كلمة (سعيد)؟",choices:["فرح","حزين","بعيد"],answer:"فرح",tip:"فرح وسعيد كلمتان متقاربتان في المعنى."}, teen:{prompt:"ما مرادف كلمة (أوشك)؟",choices:["قارب","ابتعد","توقف"],answer:"قارب",tip:"أوشك تعني قارب أو كاد."} } },
+        { name:"ترتيب الجملة", art:"🧱", levels:{ little:{prompt:"اختر جملة كاملة.",choices:["القطة تلعب","القطة في","تلعب القطة؟"],answer:"القطة تلعب",tip:"الجملة الكاملة تخبرنا بفكرة واضحة."}, primary:{prompt:"أكمل: ذهبتُ ___ المدرسة.",choices:["إلى","من","على"],answer:"إلى",tip:"نستخدم (إلى) لبيان الوجهة."}, teen:{prompt:"في جملة (كان الطالب مجتهدًا)، ما خبر كان؟",choices:["كان","الطالب","مجتهدًا"],answer:"مجتهدًا",tip:"مجتهدًا خبر كان منصوب."} } },
+        { name:"مراسل الإملاء", art:"✏️", levels:{ little:{prompt:"ما الحرف الأول في كلمة (تفاحة)؟",choices:["ت","ف","ح"],answer:"ت",tip:"تفاحة تبدأ بحرف التاء."}, primary:{prompt:"أي كلمة كُتبت كتابة صحيحة؟",choices:["مدرسة","مدرصة","مدرسا"],answer:"مدرسة",tip:"الكلمة الصحيحة هي مدرسة بالتاء المربوطة."}, teen:{prompt:"اختر الفعل الصحيح: لن ___ واجبي.",choices:["أهملَ","أهملُ","أهملْ"],answer:"أهملَ",tip:"الفعل المضارع بعد لن منصوب بالفتحة."} } },
+        { name:"رسالة سرية", art:"🔎", levels:{ little:{prompt:"بأي حرف تنتهي كلمة (باب)؟",choices:["ب","ا","م"],answer:"ب",tip:"باب تبدأ بالباء وتنتهي بالباء."}, primary:{prompt:"ما جمع كلمة (مدينة)؟",choices:["مدن","مدينات","مدائنات"],answer:"مدن",tip:"جمع مدينة هو مدن."}, teen:{prompt:"أي كلمة اسم موصول؟",choices:["الذي","لكن","سريع"],answer:"الذي",tip:"الذي اسم موصول للمفرد المذكر."} } }
+      ] },
+      { name:"غابة الأرقام", icon:"fa-tree", description:"عدّ، احسب، واكتشف الأنماط في الطبيعة.", missions:[
+        { name:"آثار في الرمل", art:"🐾", levels:{ little:{prompt:"عدّ آثار الأقدام: 🐾 🐾 🐾. كام أثر؟",choices:["٢","٣","٤"],answer:"٣",tip:"هناك ثلاثة آثار."}, primary:{prompt:"معك ٨ ثمرات وأكلت ٣. كم بقي؟",choices:["٥","٦","٤"],answer:"٥",tip:"٨ ناقص ٣ يساوي ٥."}, teen:{prompt:"كم يساوي ٧ × ٨؟",choices:["٥٤","٥٦","٦٣"],answer:"٥٦",tip:"٧ مضروبة في ٨ تساوي ٥٦."} } },
+        { name:"شجرة الحساب", art:"🌱", levels:{ little:{prompt:"كم تساوي ٢ + ١؟",choices:["٢","٣","٤"],answer:"٣",tip:"اثنان زائد واحد يساوي ثلاثة."}, primary:{prompt:"ما نصف العدد ١٨؟",choices:["٨","٩","١٠"],answer:"٩",tip:"١٨ ÷ ٢ = ٩."}, teen:{prompt:"ما قيمة ٢٥٪ من ٢٠٠؟",choices:["٢٥","٥٠","٧٥"],answer:"٥٠",tip:"ربع ٢٠٠ يساوي ٥٠."} } },
+        { name:"طريق الأنماط", art:"🧩", levels:{ little:{prompt:"ما الرقم التالي؟ ١، ٢، ٣، ...",choices:["٤","٥","٢"],answer:"٤",tip:"نزيد واحدًا كل مرة، فالرقم التالي هو ٤."}, primary:{prompt:"ما الرقم التالي؟ ٥، ١٠، ١٥، ...",choices:["١٨","٢٠","٢٥"],answer:"٢٠",tip:"نضيف ٥ في كل خطوة."}, teen:{prompt:"إذا كان ٣س = ٢١، فما قيمة س؟",choices:["٦","٧","٨"],answer:"٧",tip:"نقسم الطرفين على ٣، فتكون س = ٧."} } },
+        { name:"مخبأ الجمع", art:"➕", levels:{ little:{prompt:"معك ٢ تفاحتان وأعطاك صديقك ٣. كم تفاحة لديك؟",choices:["٤","٥","٦"],answer:"٥",tip:"٢ زائد ٣ يساوي ٥."}, primary:{prompt:"احسب: ٤٨ + ٢٧",choices:["٦٥","٧٥","٨٥"],answer:"٧٥",tip:"٤٨ + ٢٧ = ٧٥."}, teen:{prompt:"ما قيمة ٠٫٢٥ × ٨٠؟",choices:["١٥","٢٠","٢٥"],answer:"٢٠",tip:"ربع ٨٠ يساوي ٢٠."} } },
+        { name:"نهر الطرح", art:"➖", levels:{ little:{prompt:"كان معك ٥ بالونات، طار ٢. كم بقي؟",choices:["٢","٣","٤"],answer:"٣",tip:"٥ ناقص ٢ يساوي ٣."}, primary:{prompt:"احسب: ٩٦ − ٣٨",choices:["٥٨","٦٨","٥٢"],answer:"٥٨",tip:"٩٦ ناقص ٣٨ يساوي ٥٨."}, teen:{prompt:"ما ناتج ١⁄٢ + ١⁄٤؟",choices:["٢⁄٦","٣⁄٤","١⁄٨"],answer:"٣⁄٤",tip:"نحوّل النصف إلى ٢⁄٤، فيكون المجموع ٣⁄٤."} } },
+        { name:"جدول الضرب", art:"✖️", levels:{ little:{prompt:"٣ مجموعات، في كل مجموعة كرتان. كم كرة؟",choices:["٥","٦","٧"],answer:"٦",tip:"٣ مجموعات من ٢ تساوي ٦."}, primary:{prompt:"احسب: ٩ × ٧",choices:["٥٦","٦٣","٧٢"],answer:"٦٣",tip:"٩ مضروبة في ٧ تساوي ٦٣."}, teen:{prompt:"ما ناتج ١٤٤ ÷ ١٢؟",choices:["١٠","١٢","١٤"],answer:"١٢",tip:"١٢ × ١٢ يساوي ١٤٤."} } },
+        { name:"مدينة الأشكال", art:"📐", levels:{ little:{prompt:"كم ضلعًا للمثلث؟",choices:["٢","٣","٤"],answer:"٣",tip:"للمثلث ثلاثة أضلاع."}, primary:{prompt:"مستطيل طوله ٥ سم وعرضه ٣ سم. ما محيطه؟",choices:["٨ سم","١٥ سم","١٦ سم"],answer:"١٦ سم",tip:"المحيط = ٥ + ٣ + ٥ + ٣ = ١٦ سم."}, teen:{prompt:"مثلث قاعدته ٨ سم وارتفاعه ٥ سم. ما مساحته؟",choices:["٢٠ سم²","٤٠ سم²","١٣ سم²"],answer:"٢٠ سم²",tip:"مساحة المثلث = نصف القاعدة × الارتفاع."} } },
+        { name:"مسألة السوق", art:"🛒", levels:{ little:{prompt:"اشتريت تفاحتين ثم تفاحة أخرى. كم تفاحة؟",choices:["٢","٣","٤"],answer:"٣",tip:"٢ + ١ = ٣ تفاحات."}, primary:{prompt:"ثمن الدفتر ٦ جنيهات. كم ثمن ٤ دفاتر؟",choices:["١٨ جنيهًا","٢٤ جنيهًا","٣٠ جنيهًا"],answer:"٢٤ جنيهًا",tip:"٦ × ٤ = ٢٤ جنيهًا."}, teen:{prompt:"خصم ١٥٪ على سلعة ثمنها ٢٠٠. كم قيمة الخصم؟",choices:["٢٠","٣٠","٤٠"],answer:"٣٠",tip:"١٠٪ من ٢٠٠ تساوي ٢٠، و٥٪ تساوي ١٠؛ المجموع ٣٠."} } }
+      ] },
+      { name:"مختبر الفضول", icon:"fa-flask", description:"اسأل، جرّب، وافهم العالم من حولك.", missions:[
+        { name:"قطرة ومطر", art:"🌧️", levels:{ little:{prompt:"ماذا يصبح الماء عندما يتجمد؟",choices:["ثلج","بخار","رمل"],answer:"ثلج",tip:"الماء المتجمد يتحول إلى ثلج."}, primary:{prompt:"ما اسم تحوّل الماء السائل إلى بخار؟",choices:["التبخر","التجمد","الذوبان"],answer:"التبخر",tip:"عندما يسخن الماء ويتحول إلى بخار نسمي ذلك تبخرًا."}, teen:{prompt:"ما مصدر الطاقة الأساسي لدورة الماء؟",choices:["الشمس","القمر","الرياح"],answer:"الشمس",tip:"حرارة الشمس تبدأ تبخر الماء."} } },
+        { name:"أصدقاء النبات", art:"🌿", levels:{ little:{prompt:"ماذا يحتاج النبات ليكبر؟",choices:["ماء وضوء","حلوى","ألعاب"],answer:"ماء وضوء",tip:"الماء وضوء الشمس يساعدان النبات على النمو."}, primary:{prompt:"أي جزء يمتص الماء من التربة؟",choices:["الجذر","الزهرة","الثمرة"],answer:"الجذر",tip:"الجذور تمتص الماء من التربة."}, teen:{prompt:"ما الغاز الذي يمتصه النبات في البناء الضوئي؟",choices:["الأكسجين","ثاني أكسيد الكربون","النيتروجين"],answer:"ثاني أكسيد الكربون",tip:"يمتص النبات ثاني أكسيد الكربون ويطلق الأكسجين."} } },
+        { name:"قوة التعاون", art:"🤝", levels:{ little:{prompt:"صديقك وقع منه كتابه. ماذا تفعل؟",choices:["أساعده","أضحك عليه","أمشي"],answer:"أساعده",tip:"مساعدة الأصدقاء تصنع فريقًا قويًا."}, primary:{prompt:"ما أفضل طريقة لحل خلاف بين صديقين؟",choices:["الاستماع والتفاهم","الصراخ","تجاهل المشكلة"],answer:"الاستماع والتفاهم",tip:"الاستماع باحترام يساعد على حل الخلاف."}, teen:{prompt:"أي تصرف يعكس التفكير النقدي عند سماع خبر؟",choices:["التحقق من مصدره","نشره فورًا","تصديقه بلا سؤال"],answer:"التحقق من مصدره",tip:"التحقق من المصدر خطوة أساسية قبل مشاركة المعلومات."} } },
+        { name:"أصدقاء الحيوان", art:"🐠", levels:{ little:{prompt:"أين يعيش السمك؟",choices:["في الماء","في الصحراء","على الشجرة"],answer:"في الماء",tip:"تعيش الأسماك في الماء وتتنفس بالخياشيم."}, primary:{prompt:"أي حيوان يناسبه العيش في الصحراء؟",choices:["الجمل","الدب القطبي","الدلفين"],answer:"الجمل",tip:"الجمل متكيف مع حرارة الصحراء وقلة الماء."}, teen:{prompt:"في السلسلة: عشب ← جرادة ← ضفدع، ما المنتج؟",choices:["العشب","الجرادة","الضفدع"],answer:"العشب",tip:"النبات يصنع غذاءه بنفسه، لذلك هو المنتج."} } },
+        { name:"جسم الإنسان", art:"❤️", levels:{ little:{prompt:"أي عضو ينبض في صدرك؟",choices:["القلب","الأذن","الركبة"],answer:"القلب",tip:"القلب يضخ الدم إلى أنحاء الجسم."}, primary:{prompt:"بأي عضو نتنفس الهواء؟",choices:["الرئتين","المعدة","العظام"],answer:"الرئتين",tip:"تساعد الرئتان الجسم على أخذ الأكسجين."}, teen:{prompt:"ما الأوعية التي تنقل الدم بعيدًا عن القلب؟",choices:["الشرايين","الأوردة","الشعيرات فقط"],answer:"الشرايين",tip:"تنقل الشرايين الدم من القلب إلى أجزاء الجسم."} } },
+        { name:"رحلة إلى الفضاء", art:"🪐", levels:{ little:{prompt:"ما الشيء الذي يضيء نهارًا ويمنحنا الدفء؟",choices:["الشمس","القمر","المريخ"],answer:"الشمس",tip:"الشمس نجم يمد الأرض بالضوء والحرارة."}, primary:{prompt:"ما الجسم الذي يدور حول الأرض؟",choices:["القمر","الشمس","زحل"],answer:"القمر",tip:"يدور القمر حول الأرض."}, teen:{prompt:"أي كوكب يُعرف بالكوكب الأحمر؟",choices:["المريخ","الزهرة","نبتون"],answer:"المريخ",tip:"يبدو المريخ أحمر بسبب أكاسيد الحديد على سطحه."} } },
+        { name:"قوة الحركة", art:"🧲", levels:{ little:{prompt:"أي شيء يجذب قطعة الحديد؟",choices:["المغناطيس","الورقة","الماء"],answer:"المغناطيس",tip:"يجذب المغناطيس بعض المعادن مثل الحديد."}, primary:{prompt:"ما القوة التي تبطئ جسمًا ينزلق على الأرض؟",choices:["الاحتكاك","الضوء","الصوت"],answer:"الاحتكاك",tip:"الاحتكاك يعاكس الحركة بين سطحين متلامسين."}, teen:{prompt:"ما القوة التي تجذب الأجسام نحو الأرض؟",choices:["الجاذبية","المغناطيسية فقط","الطفو"],answer:"الجاذبية",tip:"تجذب الجاذبية الأجسام نحو مركز الأرض."} } },
+        { name:"طاقة المستقبل", art:"🌞", levels:{ little:{prompt:"أي مصدر يعطينا ضوءًا وحرارة في النهار؟",choices:["الشمس","حجر","كرسي"],answer:"الشمس",tip:"الشمس مصدر طبيعي للضوء والحرارة."}, primary:{prompt:"ماذا تحول الألواح الشمسية إلى كهرباء؟",choices:["ضوء الشمس","صوت المطر","حرارة النار فقط"],answer:"ضوء الشمس",tip:"تستخدم الألواح الشمسية ضوء الشمس لإنتاج الكهرباء."}, teen:{prompt:"أي مصدر طاقة متجدد؟",choices:["الرياح","الفحم","النفط"],answer:"الرياح",tip:"تتجدد الرياح طبيعيًا ولا تنفد مثل الوقود الأحفوري."} } }
+      ] }
+    ];
+    const surahs={
+      ikhlas:["قُلْ هُوَ اللَّهُ أَحَدٌ","اللَّهُ الصَّمَدُ","لَمْ يَلِدْ وَلَمْ يُولَدْ","وَلَمْ يَكُن لَهُ كُفُوًا أَحَدٌ"],
+      falaq:["قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ","مِنْ شَرِّ مَا خَلَقَ","وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ","وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ","وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ"],
+      nas:["قُلْ أَعُوذُ بِرَبِّ النَّاسِ","مَلِكِ النَّاسِ","إِلَٰهِ النَّاسِ","مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ","الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ","مِنَ الْجِنَّةِ وَالنَّاسِ"]
+    };
+    const values=[
+      {prompt:"كسرتَ كوبًا بالخطأ. ما التصرف الأفضل؟",choices:["أقول الحقيقة وأعتذر","أخفي ما حدث","ألوم شخصًا آخر"],answer:"أقول الحقيقة وأعتذر",tip:"الصدق مع الاعتذار يساعدنا على إصلاح الخطأ."},
+      {prompt:"زميلك لا يستطيع إنهاء نشاط جماعي. ماذا تفعل؟",choices:["أشاركه المساعدة","أتركه وحده","آخذ عمله دون أن أسأله"],answer:"أشاركه المساعدة",tip:"التعاون يعني أن نتقاسم العمل ونتحدث باحترام."},
+      {prompt:"صديقك يشرح رأيه. ما علامة الاحترام؟",choices:["أستمع حتى ينتهي","أقاطعه باستمرار","أسخر من كلامه"],answer:"أستمع حتى ينتهي",tip:"الاستماع بهدوء يبيّن احترامنا للآخرين."}
+    ];
+    const languageCourses={
+      en:{code:"en-US",phrases:[["Hello","مرحبًا"],["Thank you","شكرًا لك"],["I like learning","أحب التعلّم"]]},
+      fr:{code:"fr-FR",phrases:[["Bonjour","مرحبًا"],["Merci","شكرًا لك"],["J'aime apprendre","أحب التعلّم"]]},
+      es:{code:"es-ES",phrases:[["Hola","مرحبًا"],["Gracias","شكرًا لك"],["Me gusta aprender","أحب التعلّم"]]},
+      tr:{code:"tr-TR",phrases:[["Merhaba","مرحبًا"],["Teşekkürler","شكرًا لك"],["Öğrenmeyi seviyorum","أحب التعلّم"]]},
+      de:{code:"de-DE",phrases:[["Hallo","مرحبًا"],["Danke","شكرًا لك"],["Ich lerne gern","أحب التعلّم"]]},
+      it:{code:"it-IT",phrases:[["Ciao","مرحبًا"],["Grazie","شكرًا لك"],["Mi piace imparare","أحب التعلّم"]]},
+      ja:{code:"ja-JP",phrases:[["こんにちは","مرحبًا"],["ありがとう","شكرًا لك"],["学ぶことが好きです","أحب التعلّم"]]}
+    };
+    const keys={stars:"bakra-stars",completed:"bakra-completed",earned:"bakra-earned",country:"bakra-country",grade:"bakra-grade",language:"bakra-language",rating:"bakra-rating",ratingNote:"bakra-rating-note"};
+    const loadSet=key=>{try{return new Set(JSON.parse(localStorage.getItem(key)||"[]"));}catch{return new Set();}};
+    let stars=Number(localStorage.getItem(keys.stars))||0, completed=loadSet(keys.completed), earned=loadSet(keys.earned);
+    let country=localStorage.getItem(keys.country)||"", grade=localStorage.getItem(keys.grade)||"1", playerName=localStorage.getItem("bakra-player-name")||"", selectedLanguage=localStorage.getItem(keys.language)||"en", ageLevel="little", active=null, questionIndex=0, answered=false, currentQuestion=null;
+    let selectedRating=Number(localStorage.getItem(keys.rating))||0;
+    const totalMissions=worlds.reduce((sum,world)=>sum+world.missions.length,0), el=id=>document.getElementById(id);
+    const digits=value=>String(value).replace(/[0-9]/g,digit=>"٠١٢٣٤٥٦٧٨٩"[digit]);
+    const missionKey=(worldIndex,missionIndex)=>`${worldIndex}-${missionIndex}`;
+    function saveProgress(){localStorage.setItem(keys.stars,String(stars));localStorage.setItem(keys.completed,JSON.stringify([...completed]));localStorage.setItem(keys.earned,JSON.stringify([...earned]));}
+    function isUnlocked(worldIndex,missionIndex){if(worldIndex===0&&missionIndex===0)return true;if(missionIndex>0)return completed.has(missionKey(worldIndex,missionIndex-1));return worlds[worldIndex-1].missions.every((_,index)=>completed.has(missionKey(worldIndex-1,index)));}
+    function gradeBand(value){if(value.startsWith("kg")||Number(value)<=3)return "little";if(Number(value)<=6)return "primary";return "teen";}
+    function renderHeader(){
+      el("star-count").textContent=`${digits(stars)} ${stars===1?"نجمة":"نجوم"}`;
+      el("country-select").value=country;el("grade-select").value=grade;ageLevel=gradeBand(grade);
+      el("entry-name").value=playerName;el("entry-grade").value=grade;
+      el("entry-title").textContent=playerName?`أهلًا يا ${playerName}`:"أهلًا بك في عالم بكرة";
+      el("entry-submit-label").textContent=playerName?"دخول":"ابدأ المغامرة";
+      const countryName=el("country-select").selectedOptions[0].textContent;
+      const gradeName=el("grade-select").selectedOptions[0].textContent;
+      el("curriculum-summary").textContent=country?`محتوى تأسيسي مناسب لـ${gradeName} · ${countryName}`:`محتوى تأسيسي للـ${gradeName} · اختاروا الدولة لإعداد الملف`;
+    }
+    function renderMap(){
+      const doneCount=completed.size;
+      el("overall-progress").textContent=`${digits(doneCount)} من ${digits(totalMissions)} مهام`;
+      el("overall-fill").style.width=`${Math.round(doneCount/totalMissions*100)}%`;
+      el("world-map").innerHTML=worlds.map((world,worldIndex)=>{
+        const done=world.missions.filter((_,index)=>completed.has(missionKey(worldIndex,index))).length, open=isUnlocked(worldIndex,0);
+        const status=done===world.missions.length?"مكتمل":open?"مفتوح":"مقفول";
+        return `<button class="world-card" data-world="${worldIndex}" type="button" ${open?"":"disabled"} aria-label="${world.name}، ${status}"><span class="world-top"><span class="world-icon" aria-hidden="true"><i class="fa-solid ${world.icon}"></i></span><span class="world-status">${status}</span></span><h3>${world.name}</h3><p>${world.description}</p><span class="world-footer"><span>${digits(done)} من ${digits(world.missions.length)} مهام</span><span class="world-dots">${world.missions.map((_,index)=>`<i class="${completed.has(missionKey(worldIndex,index))?"done":""}"></i>`).join("")}</span></span></button>`;
+      }).join("");
+      el("world-map").querySelectorAll(".world-card:not(:disabled)").forEach(card=>card.addEventListener("click",()=>openWorld(Number(card.dataset.world))));
+    }
+    const tabNames=["map","faith","language","tutor","progress"];
+    function setTab(tab){
+      for(const name of tabNames){el(`${name}-view`).hidden=name!==tab;el(`${name}-tab`).setAttribute("aria-selected",String(name===tab));}
+      el("mission-view").hidden=true;
+      if(tab==="progress")renderProgress();
+      if(tab==="faith"){renderSurah();renderEthics();}
+      if(tab==="language")renderLanguage();
+      if(tab==="tutor")el("tutor-input").focus();
+    }
+    function renderSurah(){
+      const verses=surahs[el("surah-select").value];
+      el("verse-list").replaceChildren(...verses.map((verse,index)=>{const paragraph=document.createElement("p");paragraph.textContent=`${verse} ۝${digits(index+1)}`;return paragraph;}));
+      el("verse-list").hidden=false;el("toggle-verses").textContent="أخفِ الآيات للمراجعة";el("quran-feedback").textContent="";
+    }
+    let ethicsIndex=0, ethicsAnswered=false;
+    function renderEthics(){
+      const story=values[ethicsIndex];ethicsAnswered=false;el("ethics-prompt").textContent=story.prompt;el("ethics-feedback").textContent="";el("next-ethics").hidden=true;
+      el("ethics-choices").replaceChildren(...story.choices.map(choice=>{const button=document.createElement("button");button.type="button";button.className="ethics-choice";button.textContent=choice;button.addEventListener("click",()=>checkEthics(button,choice));return button;}));
+    }
+    function checkEthics(button,choice){
+      if(ethicsAnswered)return;
+      if(choice!==values[ethicsIndex].answer){button.classList.add("wrong");button.disabled=true;el("ethics-feedback").textContent="جرّب اختيارًا آخر.";return;}
+      ethicsAnswered=true;button.classList.add("correct");el("ethics-choices").querySelectorAll("button").forEach(item=>{item.disabled=true;});
+      const key=`ethics-${ethicsIndex}`;if(!earned.has(key)){earned.add(key);stars+=1;saveProgress();renderHeader();}
+      el("ethics-feedback").textContent=`أحسنت. ${values[ethicsIndex].tip} ⭐`;el("next-ethics").hidden=false;
+    }
+    function renderLanguage(){
+      el("language-select").value=selectedLanguage;
+      const course=languageCourses[selectedLanguage];
+      el("phrase-list").replaceChildren(...course.phrases.map(([phrase,meaning])=>{
+        const card=document.createElement("article");card.className="phrase-card";
+        const word=document.createElement("strong");word.className="phrase-word";word.dir="auto";word.textContent=phrase;
+        const translation=document.createElement("span");translation.className="phrase-meaning";translation.textContent=meaning;
+        const speak=document.createElement("button");speak.className="phrase-speak";speak.type="button";speak.innerHTML='<i class="fa-solid fa-volume-high" aria-hidden="true"></i> اسمع';
+        speak.addEventListener("click",()=>speakPhrase(phrase,course.code));card.append(word,translation,speak);return card;
+      }));
+      el("language-feedback").textContent="";
+    }
+    function speakPhrase(phrase,language){
+      if(!("speechSynthesis" in window)){el("language-feedback").textContent="النطق الصوتي غير متاح في هذا المتصفح.";return;}
+      window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(phrase);utterance.lang=language;utterance.rate=.82;window.speechSynthesis.speak(utterance);
+    }
+    function renderRating(){
+      document.querySelectorAll(".rating-star").forEach(button=>button.setAttribute("aria-pressed",String(Number(button.dataset.rating)<=selectedRating)));
+      el("rating-note-input").value=localStorage.getItem(keys.ratingNote)||"";
+      el("rating-status").textContent=selectedRating?`تقييمك السابق: ${digits(selectedRating)} من ٥ نجوم.`:"";
+    }
+    function addChatMessage(text,role){const message=document.createElement("div");message.className=`chat-message ${role}`;message.textContent=text;el("tutor-log").append(message);el("tutor-log").scrollTop=el("tutor-log").scrollHeight;}
+    function answerTutor(action){
+      if(!currentQuestion)return "افتح مهمة من خريطة العوالم أولًا، وسأساعدك فيها.";
+      if(action==="hint")return ageLevel==="little"?"اقرأ السؤال بهدوء، وانظر إلى الحروف أو الصور واحدةً واحدة.":"قسّم السؤال إلى خطوات صغيرة، ثم راجع كل معلومة قبل اختيار إجابتك.";
+      return currentQuestion.tip;
+    }
+    function openWorld(worldIndex){
+      const next=worlds[worldIndex].missions.findIndex((_,index)=>isUnlocked(worldIndex,index)&&!completed.has(missionKey(worldIndex,index)));
+      active={worldIndex,missionIndex:next===-1?0:next};questionIndex=0;
+      el("map-view").hidden=true;el("progress-view").hidden=true;el("mission-view").hidden=false;
+      el("map-tab").setAttribute("aria-selected","false");el("progress-tab").setAttribute("aria-selected","false");renderQuestion();
+      el("mission-view").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+    function renderQuestion(){
+      const world=worlds[active.worldIndex],mission=world.missions[active.missionIndex];currentQuestion=mission.levels[ageLevel];answered=false;
+      el("mission-count").textContent=`المهمة ${digits(active.missionIndex+1)} من ${digits(world.missions.length)}`;
+      el("mission-title").textContent=mission.name;el("mission-hint").textContent=`${world.name} · أجب صح عشان تجمع نجمة وتكمل الطريق.`;
+      el("question-kicker").textContent=`تحدي ${world.name}`;el("question-text").textContent=currentQuestion.prompt;el("question-art").textContent=mission.art;
+      el("mission-feedback").textContent="";el("mission-feedback").className="mission-feedback";el("continue-mission").style.display="none";
+      el("continue-label").textContent=active.missionIndex===world.missions.length-1?"إنهاء العالم":"المهمة التالية";
+      el("choice-list").replaceChildren(...currentQuestion.choices.map(choice=>{const button=document.createElement("button");button.type="button";button.className="choice";button.textContent=choice;button.addEventListener("click",()=>checkAnswer(button,choice));return button;}));
+    }
+    function checkAnswer(button,choice){
+      if(answered)return;
+      if(choice!==currentQuestion.answer){button.classList.add("wrong");button.disabled=true;el("mission-feedback").textContent="لسه مش كده.. جرّب اختيار تاني!";el("mission-feedback").className="mission-feedback retry";return;}
+      answered=true;button.classList.add("correct");el("choice-list").querySelectorAll("button").forEach(item=>{item.disabled=true;});
+      const rewardKey=`${missionKey(active.worldIndex,active.missionIndex)}-${ageLevel}`;
+      if(!earned.has(rewardKey)){earned.add(rewardKey);stars+=1;saveProgress();renderHeader();}
+      el("mission-feedback").textContent=`إجابة صحيحة! ${currentQuestion.tip} ⭐`;el("mission-feedback").className="mission-feedback success";el("continue-mission").style.display="inline-flex";
+    }
+    function continueMission(){
+      const world=worlds[active.worldIndex];completed.add(missionKey(active.worldIndex,active.missionIndex));saveProgress();active.missionIndex+=1;
+      if(active.missionIndex<world.missions.length){questionIndex=0;renderQuestion();return;}
+      active=null;el("mission-view").hidden=true;el("map-view").hidden=false;el("map-tab").setAttribute("aria-selected","true");el("progress-tab").setAttribute("aria-selected","false");renderMap();
+      el("hero-title").innerHTML="عالم جديد<br>ينتظر اكتشافك";el("start-label").textContent="اكتشف الطريق التالي";window.scrollTo({top:0,behavior:"smooth"});
+    }
+    function renderProgress(){
+      el("stat-stars").textContent=digits(stars);el("stat-missions").textContent=`${digits(completed.size)} / ${digits(totalMissions)}`;
+      const opened=worlds.filter((_,index)=>isUnlocked(index,0)).length;el("stat-worlds").textContent=`${digits(opened)} / ${digits(worlds.length)}`;
+      const badges=[{icon:"fa-rocket",title:"أول انطلاقة",detail:"اجمع أول نجمة",earned:stars>=1},{icon:"fa-map",title:"مستكشف",detail:"أكمل أول عالم",earned:worlds[0].missions.every((_,index)=>completed.has(missionKey(0,index)))},{icon:"fa-star",title:"نجم المعرفة",detail:"اجمع ٥ نجوم",earned:stars>=5}];
+      el("badges").innerHTML=badges.map(badge=>`<div class="badge ${badge.earned?"earned":""}"><span class="badge-icon" aria-hidden="true"><i class="fa-solid ${badge.icon}"></i></span><span><strong>${badge.title}</strong><small>${badge.detail}</small></span></div>`).join("");
+    }
+    el("country-select").addEventListener("change",event=>{country=event.target.value;localStorage.setItem(keys.country,country);renderHeader();});
+    el("grade-select").addEventListener("change",event=>{grade=event.target.value;localStorage.setItem(keys.grade,grade);renderHeader();if(active)renderQuestion();});
+    el("entry-form").addEventListener("submit",event=>{
+      event.preventDefault();
+      playerName=el("entry-name").value.trim();
+      if(!playerName){el("entry-name").focus();return;}
+      grade=el("entry-grade").value;
+      localStorage.setItem("bakra-player-name",playerName);
+      localStorage.setItem(keys.grade,grade);
+      sessionStorage.setItem("bakra-session-active","true");
+      renderHeader();
+      el("entry-screen").hidden=true;el("app").hidden=false;
+      window.scrollTo({top:0,behavior:"instant"});
+    });
+    for(const tab of tabNames)el(`${tab}-tab`).addEventListener("click",()=>setTab(tab));
+    el("back-to-map").addEventListener("click",()=>{active=null;el("mission-view").hidden=true;el("map-view").hidden=false;el("map-tab").setAttribute("aria-selected","true");el("progress-tab").setAttribute("aria-selected","false");renderMap();});
+    el("continue-mission").addEventListener("click",continueMission);
+    el("start-adventure").addEventListener("click",()=>{const next=worlds.flatMap((world,worldIndex)=>world.missions.map((_,missionIndex)=>({worldIndex,missionIndex}))).find(({worldIndex,missionIndex})=>isUnlocked(worldIndex,missionIndex)&&!completed.has(missionKey(worldIndex,missionIndex)));if(next)openWorld(next.worldIndex);else{setTab("map");document.querySelector(".section-nav").scrollIntoView({behavior:"smooth"});}});
+    el("surah-select").addEventListener("change",renderSurah);
+    el("toggle-verses").addEventListener("click",()=>{el("verse-list").hidden=!el("verse-list").hidden;el("toggle-verses").textContent=el("verse-list").hidden?"أظهر الآيات":"أخفِ الآيات للمراجعة";el("quran-feedback").textContent=el("verse-list").hidden?"حاول تذكّر الآيات بالترتيب.":"";});
+    el("next-ethics").addEventListener("click",()=>{ethicsIndex=(ethicsIndex+1)%values.length;renderEthics();});
+    el("language-select").addEventListener("change",event=>{selectedLanguage=event.target.value;localStorage.setItem(keys.language,selectedLanguage);renderLanguage();});
+    document.querySelectorAll(".rating-star").forEach(button=>button.addEventListener("click",()=>{selectedRating=Number(button.dataset.rating);document.querySelectorAll(".rating-star").forEach(star=>star.setAttribute("aria-pressed",String(Number(star.dataset.rating)<=selectedRating)));}));
+    el("rating-form").addEventListener("submit",event=>{event.preventDefault();if(!selectedRating){el("rating-status").textContent="اختار عدد النجوم أولًا.";return;}localStorage.setItem(keys.rating,String(selectedRating));localStorage.setItem(keys.ratingNote,el("rating-note-input").value.trim());el("rating-status").textContent="شكرًا! تم حفظ تقييمك على هذا الجهاز.";});
+    document.querySelectorAll("[data-tutor-action]").forEach(button=>button.addEventListener("click",()=>addChatMessage(answerTutor(button.dataset.tutorAction),"assistant")));
+    el("tutor-form").addEventListener("submit",event=>{event.preventDefault();const input=el("tutor-input"),question=input.value.trim();if(!question)return;addChatMessage(question,"child");const action=/تلميح|مساعدة|hint/i.test(question)?"hint":"explain";addChatMessage(answerTutor(action),"assistant");input.value="";});
+    renderHeader();renderMap();renderLanguage();renderRating();
+    if(sessionStorage.getItem("bakra-session-active")==="true"&&playerName){el("entry-screen").hidden=true;el("app").hidden=false;}
+    if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("./sw.js").catch(()=>{});
+    let installPrompt;
+    const installButton=el("install-app"), installDialog=el("install-help");
+    const isInstalled=window.matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+    installButton.hidden=isInstalled;
+    function showInstallHelp(){
+      const agent=navigator.userAgent;
+      let message="من قائمة المتصفح ⋮ اختار Install app أو Add to Home screen.";
+      if(/iPhone|iPad|iPod/.test(agent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1))message="افتح الصفحة في Safari، واضغط زر المشاركة، ثم اختار Add to Home Screen.";
+      else if(/Android/i.test(agent))message="افتح الصفحة في Chrome، واضغط القائمة ⋮ ثم Install app أو Add to Home screen.";
+      else if(/WhatsApp|Instagram|FBAN|FBAV|Telegram/i.test(agent))message="افتح الرابط في Chrome أو Safari، ثم اختار Install app أو Add to Home Screen من قائمة المتصفح.";
+      el("install-guidance").textContent=message;
+      if(typeof installDialog.showModal==="function")installDialog.showModal();
+    }
+    window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();installPrompt=event;});
+    window.addEventListener("appinstalled",()=>{installButton.hidden=true;installPrompt=null;});
+    installButton.addEventListener("click",async()=>{
+      if(!installPrompt){showInstallHelp();return;}
+      const prompt=installPrompt;installPrompt=null;
+      try{
+        await prompt.prompt();
+        const result=await prompt.userChoice;
+        if(result.outcome==="accepted")el("install-label").textContent="تم طلب التثبيت";
+      }catch{showInstallHelp();}
+    });
+    el("install-help-close").addEventListener("click",()=>installDialog.close());
+    el("install-help-done").addEventListener("click",()=>installDialog.close());
+  </script>
+</body>
+</html>

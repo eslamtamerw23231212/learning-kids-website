@@ -1,0 +1,13 @@
+{
+  "name": "عالم بكرة | مغامرتك تبدأ بالتعلّم",
+  "short_name": "عالم بكرة",
+  "description": "مغامرات تعليمية ومهام تفاعلية للأطفال.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./world.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f0f6ef",
+  "theme_color": "#123e3b",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
